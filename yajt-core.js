@@ -24,6 +24,7 @@ YAJT.core = {
         var image_data = this.compute_image_data();
         var reduction = YAJT.dimension_reduction.from_top(image_data);
         this.draw_graph(reduction);
+        YAJT.audio.generate(reduction);
 
         var self = this;
         setTimeout(function () {
