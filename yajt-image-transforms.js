@@ -11,5 +11,14 @@ YAJT.image_transforms = {
             data[i * 4 + 1] = brightness;
             data[i * 4 + 2] = brightness;
         }
+    },
+    black_and_white: function (data) {
+        var l = data.length / 4;
+        for (var i = 0; i < l; i++) {
+            var brightness = ( data[i * 4] > 128 ) ? 256 : 0;
+            data[i * 4 + 0] = brightness;
+            data[i * 4 + 1] = brightness;
+            data[i * 4 + 2] = brightness;
+        }
     }
 };
