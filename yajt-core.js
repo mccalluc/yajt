@@ -75,8 +75,9 @@ YAJT.core = {
     compute_image_data: function () {
         this.input.drawImage(this.video, 0, 0, this.config.width, this.config.height);
         var image_data = this.input.getImageData(0, 0, this.config.width, this.config.height);
-        for (var i = 0; i < this.config.transforms.length; i++) {
-            this.config.transforms[i](image_data.data);
+        var transforms = this.config.transforms;
+        for (var i = 0; i < transforms.length; i++) {
+            transforms[i](image_data.data);
         }
         this.output.putImageData(image_data, 0, 0);
         return;
