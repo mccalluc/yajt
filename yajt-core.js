@@ -14,13 +14,16 @@ YAJT.core = {
         width: 200,
         height: 150,
         timeout: 500, // 0.5 seconds
-        transforms: []
+        transforms: [],
+        threshold: 128
     },
     timer_callback: function () {
         if (this.video.paused || this.video.ended) {
             return;
         }
-        this.compute_image_data();
+        image_data = this.compute_image_data();
+        console.log(YAJT.dimension_reduction.from_top(image_data));
+
         var self = this;
         setTimeout(function () {
             self.timer_callback();
@@ -75,11 +78,12 @@ YAJT.core = {
     compute_image_data: function () {
         this.input.drawImage(this.video, 0, 0, this.config.width, this.config.height);
         var image_data = this.input.getImageData(0, 0, this.config.width, this.config.height);
+        ;
         var transforms = this.config.transforms;
         for (var i = 0; i < transforms.length; i++) {
             transforms[i](image_data.data);
         }
         this.output.putImageData(image_data, 0, 0);
-        return;
+        return image_data.data;
     }
 };

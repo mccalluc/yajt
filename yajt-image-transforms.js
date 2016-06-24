@@ -21,7 +21,7 @@ YAJT.image_transforms = {
             data[i * 4 + 2] = brightness;
         }
     },
-    edge_detection: function (data) {
+    horizontal_edge_detection: function (data) {
         // Assumes grayscale has already been applied, 
         // and we can just look at the first byte of each four.
         var get = YAJT.image_transforms._get;
@@ -38,6 +38,7 @@ YAJT.image_transforms = {
                 scratch[index + 2] = value;
             }
         }
+        // A 1-pixel border still remains after this.
         data.set(scratch);
     },
     _get: function (data, x, y) {

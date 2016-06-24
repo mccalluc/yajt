@@ -11,13 +11,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
         <script src="yajt-core.js"></script>
         <script src="yajt-image-transforms.js"></script>
+        <script src="yajt-dimension-reduction.js"></script>
         <script>
             $(function () {
                 YAJT.core.init({
                     transforms: [
                         YAJT.image_transforms.grayscale,
-                        YAJT.image_transforms.edge_detection
-                        //YAJT.image_transforms.black_and_white
+                        YAJT.image_transforms.horizontal_edge_detection
                     ]
                 });
             });
