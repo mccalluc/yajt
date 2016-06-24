@@ -11,7 +11,7 @@ var YAJT = {
         if (this.video.paused || this.video.ended) {
             return;
         }
-        this.compute_frame();
+        this.compute_image_data();
         var self = this;
         setTimeout(function () {
             self.timer_callback();
@@ -63,20 +63,20 @@ var YAJT = {
             self.timer_callback();
         }, false);
     },
-    compute_frame: function () {
+    compute_image_data: function () {
         this.input.drawImage(this.video, 0, 0, this.config.width, this.config.height);
-        var frame = this.input.getImageData(0, 0, this.config.width, this.config.height);
-        var l = frame.data.length / 4;
+        var image_data = this.input.getImageData(0, 0, this.config.width, this.config.height);
+        var l = image_data.data.length / 4;
 
         for (var i = 0; i < l; i++) {
-//      var r = frame.data[i * 4 + 0];
-//      var g = frame.data[i * 4 + 1];
-//      var b = frame.data[i * 4 + 2];
+//      var r = image_data.data[i * 4 + 0];
+//      var g = image_data.data[i * 4 + 1];
+//      var b = image_data.data[i * 4 + 2];
 //      if (g > 100 && r > 100 && b < 43)
-//        frame.data[i * 4 + 3] = 0;
-            frame.data[i * 4 + 1] = 0;
+//        image_data.data[i * 4 + 3] = 0;
+            image_data.data[i * 4 + 1] = 0;
         }
-        this.output.putImageData(frame, 0, 0);
+        this.output.putImageData(image_data, 0, 0);
         return;
     }
 };
