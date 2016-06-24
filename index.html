@@ -1,6 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <title>
+        YAJT: Yet Another Javascript Theramin
+    </title>
     <style>
       body {
         background: black;
@@ -18,10 +21,9 @@
         background:#3B3B3B;
       }
     </style>
-    <script type="text/javascript;version=1.8" src="main.js"></script>
   </head>
 
-  <body onload="processor.doLoad()">
+  <body>
     <div>
       <video id="video" autoplay/>
     </div>
@@ -29,5 +31,7 @@
       <canvas id="c1" width="160" height="96"></canvas>
       <canvas id="c2" width="160" height="96"></canvas>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
