@@ -1,6 +1,8 @@
 var YAJT = {
     config: {
         selector: '#yajt',
+        input_class: 'input',
+        output_class: 'output',
         width: 200,
         height: 150,
         timeout: 500 // 0.5 seconds
@@ -23,20 +25,23 @@ var YAJT = {
             width: this.config.width,
             height: this.config.height
         };
-        $(this.config.selector)
-                .append($('<video autoplay>').attr(w_h).hide())
-                .append($('<canvas class="input">').attr(w_h).hide())
-                .append('<canvas class="output">').attr(w_h);
-        this.video = $(this.config.selector + ' video')[0];
-        this.input = $(this.config.selector + ' .input')[0].getContext('2d');
-        this.output = $(this.config.selector + ' .output')[0].getContext('2d');
-        var self = this;
+        var selector = this.config.selector;
+        var input_class = this.config.input_class;
+        var output_class = this.config.output_class;
 
+        $(selector)
+                .append($('<video autoplay>').attr(w_h).hide())
+                .append($('<canvas class="' + input_class + '">').attr(w_h).hide())
+                .append($('<canvas class="' + output_class + '">').attr(w_h));
+        this.video = $(selector + ' video')[0];
+        this.input = $(selector + ' .' + input_class)[0].getContext('2d');
+        this.output = $(selector + ' .' + output_class)[0].getContext('2d');
+
+        var self = this;
         var video_obj = {'video': true},
         error_handler = function (error) {
             console.log('Video capture error: ', error.code);
         };
-
         if (navigator.getUserMedia) { // Standard
             navigator.getUserMedia(video_obj, function (stream) {
                 self.video.src = stream;
