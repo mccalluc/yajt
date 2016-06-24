@@ -9,8 +9,12 @@ var YAJT = {
             self.timer_callback();
         }, 500); // 500 ms: just so the processor isn't running as hot.
     },
-    do_load: function () {
-        this.video = $('#video')[0];
+    do_load: function (selector) {
+        $(selector)
+                .append('<video autoplay width="200" height="150">')
+                .append('<canvas id="c1" width="200" height="150">')
+                .append('<canvas id="c2" width="200" height="150">');
+        this.video = $(selector + ' video')[0];
         this.ctx1 = $('#c1')[0].getContext('2d');
         this.ctx2 = $('#c2')[0].getContext('2d');
         var self = this;
@@ -58,7 +62,3 @@ var YAJT = {
         return;
     }
 };
-
-$(function() {
-   YAJT.do_load(); 
-});

@@ -1,37 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>
-        YAJT: Yet Another Javascript Theramin
-    </title>
-    <style>
-      body {
-        background: black;
-        color:#CCCCCC; 
-      }
-      #c2 {
-        background-image: url(foo.png);
-        background-repeat: no-repeat;
-      }
-      div {
-        float: left;
-        border :1px solid #444444;
-        padding:10px;
-        margin: 10px;
-        background:#3B3B3B;
-      }
-    </style>
-  </head>
+    <head>
+        <title>
+            YAJT: Yet Another Javascript Theramin
+        </title>
+    </head>
 
-  <body>
-    <div>
-      <video id="video" autoplay width="200" height="150"/>
-    </div>
-    <div>
-      <canvas id="c1" width="200" height="150"></canvas>
-      <canvas id="c2" width="200" height="150"></canvas>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="main.js"></script>
-  </body>
+    <body>
+        <div id="yajt"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="main.js"></script>
+        <script>
+            $(function() {
+                YAJT.do_load('#yajt'); 
+            });
+        </script>
+    </body>
 </html>
