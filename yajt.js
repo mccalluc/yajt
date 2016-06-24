@@ -1,3 +1,7 @@
+// Began with a copy-and-paste from:
+//   http://www.html5rocks.com/en/tutorials/getusermedia/intro/ 
+//   https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Manipulating_video_using_canvas
+
 var YAJT = {
     config: {
         selector: '#yajt',
@@ -6,9 +10,7 @@ var YAJT = {
         width: 200,
         height: 150,
         timeout: 500, // 0.5 seconds
-        transform: function(data) {
-            // no-op by default
-        }
+        transforms: []
     },
     timer_callback: function () {
         if (this.video.paused || this.video.ended) {
@@ -69,7 +71,9 @@ var YAJT = {
     compute_image_data: function () {
         this.input.drawImage(this.video, 0, 0, this.config.width, this.config.height);
         var image_data = this.input.getImageData(0, 0, this.config.width, this.config.height);
-        this.config.transform(image_data.data);
+        for (var i = 0; i < this.config.transforms.length; i++) {
+            this.config.transforms[i](image_data.data);
+        }
         this.output.putImageData(image_data, 0, 0);
         return;
     }
