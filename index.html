@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
         <title>
             YAJT: Yet Another Javascript Theramin
@@ -9,10 +9,10 @@
     <body>
         <div id="yajt"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-        <script src="main.js"></script>
+        <script src="yajt.js"></script>
         <script>
             $(function() {
-                YAJT.do_load('#yajt'); 
+                YAJT.init({width: 400, height: 100}); 
             });
         </script>
     </body>
