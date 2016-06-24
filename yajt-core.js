@@ -15,14 +15,15 @@ YAJT.core = {
         height: 150,
         timeout: 500, // 0.5 seconds
         transforms: [],
-        threshold: 128
+        threshold: 32
     },
     timer_callback: function () {
         if (this.video.paused || this.video.ended) {
             return;
         }
-        image_data = this.compute_image_data();
-        console.log(YAJT.dimension_reduction.from_top(image_data));
+        var image_data = this.compute_image_data();
+        var reduction = YAJT.dimension_reduction.from_top(image_data);
+        this.draw_graph(reduction);
 
         var self = this;
         setTimeout(function () {
@@ -78,12 +79,21 @@ YAJT.core = {
     compute_image_data: function () {
         this.input.drawImage(this.video, 0, 0, this.config.width, this.config.height);
         var image_data = this.input.getImageData(0, 0, this.config.width, this.config.height);
-        ;
         var transforms = this.config.transforms;
         for (var i = 0; i < transforms.length; i++) {
             transforms[i](image_data.data);
         }
         this.output.putImageData(image_data, 0, 0);
         return image_data.data;
+    },
+    draw_graph: function(array) {
+        this.output.strokeStyle = '#F00';
+        this.output.lineWidth = 3;
+        this.output.beginPath();
+        this.output.moveTo(2, array[0]);
+        for (var i = 0; i < array.length; i++) {
+            this.output.lineTo(i+2, array[i]);
+        }
+        this.output.stroke();
     }
 };
