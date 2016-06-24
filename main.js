@@ -10,40 +10,34 @@ var YAJT = {
         }, 500); // 500 ms: just so the processor isn't running as hot.
     },
     do_load: function () {
-        this.video = $("#video")[0];
-        this.c1 = $("#c1")[0];
-        this.ctx1 = this.c1.getContext("2d");
-        this.c2 = $("#c2")[0];
-        this.ctx2 = this.c2.getContext("2d");
+        this.video = $('#video')[0];
+        this.ctx1 = $('#c1')[0].getContext('2d');
+        this.ctx2 = $('#c2')[0].getContext('2d');
         var self = this;
 
-        var video = document.getElementById("video"),
-                videoObj = {"video": true},
+        var video_obj = {'video': true},
         error_handler = function (error) {
-            console.log("Video capture error: ", error.code);
+            console.log('Video capture error: ', error.code);
         };
 
         if (navigator.getUserMedia) { // Standard
-            navigator.getUserMedia(videoObj, function (stream) {
-                video.src = stream;
-                video.play();
+            navigator.getUserMedia(video_obj, function (stream) {
+                self.video.src = stream;
+                self.video.play();
             }, error_handler);
         } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
-            navigator.webkitGetUserMedia(videoObj, function (stream) {
-                video.src = window.webkitURL.createObjectURL(stream);
-                video.play();
+            navigator.webkitGetUserMedia(video_obj, function (stream) {
+                self.video.src = window.webkitURL.createObjectURL(stream);
+                self.video.play();
             }, error_handler);
         } else if (navigator.mozGetUserMedia) { // Firefox-prefixed
-            navigator.mozGetUserMedia(videoObj, function (stream) {
-                video.src = window.URL.createObjectURL(stream);
-                video.play();
+            navigator.mozGetUserMedia(video_obj, function (stream) {
+                self.video.src = window.URL.createObjectURL(stream);
+                self.video.play();
             }, error_handler);
         }
 
-
-        this.video.addEventListener("play", function () {
-            self.width = self.video.videoWidth / 2;
-            self.height = self.video.videoHeight / 2;
+        this.video.addEventListener('play', function () {
             self.timer_callback();
         }, false);
     },
