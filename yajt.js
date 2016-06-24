@@ -5,7 +5,10 @@ var YAJT = {
         output_class: 'output',
         width: 200,
         height: 150,
-        timeout: 500 // 0.5 seconds
+        timeout: 500, // 0.5 seconds
+        transform: function(data) {
+            // no-op by default
+        }
     },
     timer_callback: function () {
         if (this.video.paused || this.video.ended) {
@@ -47,12 +50,12 @@ var YAJT = {
                 self.video.src = stream;
                 self.video.play();
             }, error_handler);
-        } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
+        } else if (navigator.webkitGetUserMedia) { // WebKit
             navigator.webkitGetUserMedia(video_obj, function (stream) {
                 self.video.src = window.webkitURL.createObjectURL(stream);
                 self.video.play();
             }, error_handler);
-        } else if (navigator.mozGetUserMedia) { // Firefox-prefixed
+        } else if (navigator.mozGetUserMedia) { // Firefox
             navigator.mozGetUserMedia(video_obj, function (stream) {
                 self.video.src = window.URL.createObjectURL(stream);
                 self.video.play();
@@ -66,16 +69,7 @@ var YAJT = {
     compute_image_data: function () {
         this.input.drawImage(this.video, 0, 0, this.config.width, this.config.height);
         var image_data = this.input.getImageData(0, 0, this.config.width, this.config.height);
-        var l = image_data.data.length / 4;
-
-        for (var i = 0; i < l; i++) {
-//      var r = image_data.data[i * 4 + 0];
-//      var g = image_data.data[i * 4 + 1];
-//      var b = image_data.data[i * 4 + 2];
-//      if (g > 100 && r > 100 && b < 43)
-//        image_data.data[i * 4 + 3] = 0;
-            image_data.data[i * 4 + 1] = 0;
-        }
+        this.config.transform(image_data.data);
         this.output.putImageData(image_data, 0, 0);
         return;
     }
