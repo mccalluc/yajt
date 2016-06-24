@@ -2,7 +2,11 @@
 //   http://www.html5rocks.com/en/tutorials/getusermedia/intro/ 
 //   https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Manipulating_video_using_canvas
 
-var YAJT = {
+if (typeof YAJT === 'undefined') {
+    YAJT = {};
+}
+
+YAJT.core = {
     config: {
         selector: '#yajt',
         input_class: 'input',
