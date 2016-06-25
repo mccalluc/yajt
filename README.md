@@ -1,5 +1,5 @@
 # yajt
 
 media capture + canvas + sobel operator + web audio =
-[yet another javascript theramin](https://mccalluc.github.io/yajt/)
+[yet another javascript theremin](https://mccalluc.github.io/yajt/)
 
