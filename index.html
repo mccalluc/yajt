@@ -2,17 +2,36 @@
 <html>
     <head>
         <title>
-            YAJT: Yet Another Javascript Theramin
+            Yet Another Javascript Theramin
         </title>
         <style>
-            canvas { width: 50% }
-            body { margin: 0 }
+            canvas { width: 50%; float: left; padding-right: 2em; }
+            body { font-family: sans-serif; }
+            .ui-widget { width: 30%; float: right; }
         </style>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     </head>
 
     <body>
-        <div id="yajt"></div>
+        <div>
+            <div id="yajt"></div>
+            <div>
+                <h1>
+                    Yet Another Javascript Theramin
+                </h1>
+                <p>
+                    You are the tone generator.
+                    It helps to stand against a well-lit blank wall of a contrasting color.
+                    Works best in Firefox right now.
+                    <a href="http://github.com/mccalluc/yajt">Source on Github.</a>
+                </p>
+                <p>Threshold <span id="threshold"></span></p>
+                <p>Rate <span id="rate"></span></p>
+            </div>
+        </div>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="yajt-core.js"></script>
         <script src="yajt-image-transforms.js"></script>
         <script src="yajt-dimension-reduction.js"></script>
@@ -25,6 +44,16 @@
                         YAJT.image_transforms.horizontal_edge_detection
                     ]
                 });
+            });
+            $('#threshold').slider({min: 1, max: 254, value: YAJT.core.config.threshold,
+                slide: function(event, ui) {
+                    YAJT.core.config.threshold = ui.value;
+                }
+            });
+            $('#rate').slider({min: 0.5, max: 30, step: 0.5, value: 1000 / YAJT.core.config.timeout,
+                slide: function(event, ui) {
+                    YAJT.core.config.timeout = 1000 / ui.value;
+                }
             });
         </script>
     </body>
