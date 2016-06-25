@@ -13,7 +13,7 @@ YAJT.core = {
         output_class: 'output',
         width: 200,
         height: 150,
-        timeout: 500, // 0.5 seconds
+        timeout: 100, // 0.1 seconds
         transforms: [],
         threshold: 32
     },

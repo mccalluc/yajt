@@ -13,7 +13,8 @@ YAJT.audio = {
         var buffer = audio_context.createBuffer(channels, frameCount, audio_context.sampleRate);
         var data = buffer.getChannelData(0);
         for (var i = 0; i < frameCount; i++) {
-            data[i] = ((samples[i] / YAJT.core.config.height) - 0.5) * 2;
+            //data[i] = Math.sin(i * 2* Math.PI/frameCount)
+            data[i] = ((samples[i] / YAJT.core.config.height) - 0.5);
         }
 
         var source = audio_context.createBufferSource();
@@ -21,6 +22,6 @@ YAJT.audio = {
         source.loop = true;
         source.connect(audio_context.destination);
         source.start();
-        source.stop(YAJT.core.config.timeout);
+        source.stop(YAJT.core.config.timeout/1000); // Seconds, not ms.
     }
 };
