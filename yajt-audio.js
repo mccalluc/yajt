@@ -8,12 +8,13 @@ YAJT.audio = {
     generate: function (samples) {
         var audio_context = new (window.AudioContext || window.webkitAudioContext)();
         var channels = 1;
-        var frameCount = samples.length;
+        var frame_count = samples.length;
 
-        var buffer = audio_context.createBuffer(channels, frameCount, audio_context.sampleRate);
+        var buffer = audio_context.createBuffer(channels, frame_count,
+                Math.pow(2, YAJT.core.config.tone / 6) * 440 * frame_count);
         var data = buffer.getChannelData(0);
-        for (var i = 0; i < frameCount; i++) {
-            //data[i] = Math.sin(i * 2* Math.PI/frameCount)
+        for (var i = 0; i < frame_count; i++) {
+            //data[i] = Math.sin(i * 2* Math.PI/frame_count)
             data[i] = ((samples[i] / YAJT.core.config.height) - 0.5);
         }
 
@@ -22,6 +23,6 @@ YAJT.audio = {
         source.loop = true;
         source.connect(audio_context.destination);
         source.start();
-        source.stop(YAJT.core.config.timeout/1000); // Seconds, not ms.
+        source.stop(YAJT.core.config.timeout / 1000); // Seconds, not ms.
     }
 };

@@ -27,6 +27,7 @@
                 </p>
                 <p>Threshold <span id="threshold"></span></p>
                 <p>Rate <span id="rate"></span></p>
+                <p>Tone <span id="tone"></span></p>
             </div>
         </div>
         
@@ -53,6 +54,11 @@
             $('#rate').slider({min: 0.5, max: 30, step: 0.5, value: 1000 / YAJT.core.config.timeout,
                 slide: function(event, ui) {
                     YAJT.core.config.timeout = 1000 / ui.value;
+                }
+            });
+            $('#tone').slider({min: -6, max: 6, step: 0.5, value: YAJT.core.config.tone,
+                slide: function(event, ui) {
+                    YAJT.core.config.tone = ui.value;
                 }
             });
         </script>
