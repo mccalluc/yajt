@@ -72,6 +72,9 @@ YAJT.core = {
                 self.video.src = window.URL.createObjectURL(stream);
                 self.video.play();
             }, error_handler);
+        } else {
+            alert('Error: navigator.getUserMedia not supported');
+            return;
         }
 
         this.video.addEventListener('play', function () {

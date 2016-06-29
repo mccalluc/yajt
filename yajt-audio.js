@@ -6,7 +6,15 @@ if (typeof YAJT === 'undefined') {
 
 YAJT.audio = {
     generate: function (samples) {
-        var audio_context = new (window.AudioContext || window.webkitAudioContext)();
+        var audio_context;
+        if (window.AudioContext) {
+            audio_context = new window.AudioContext();
+        } else if (window.webkitAudioContext) {
+            audio_context = new window.webkitAudioContext();
+        } else {
+            alert("Error: window.AudioContext not supported");
+            return;
+        }
         var channels = 1;
         var frame_count = samples.length;
 
