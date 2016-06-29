@@ -52,6 +52,11 @@ YAJT.core = {
         this.input = $(selector + ' .' + input_class)[0].getContext('2d');
         this.output = $(selector + ' .' + output_class)[0].getContext('2d');
 
+        // Less confusing UI if we mirror it:
+        this.input.translate(this.config.width, 0);
+        this.input.scale(-1, 1);
+
+
         var self = this;
         var video_obj = {'video': true},
         error_handler = function (error) {
@@ -91,13 +96,13 @@ YAJT.core = {
         this.output.putImageData(image_data, 0, 0);
         return image_data.data;
     },
-    draw_graph: function(array) {
+    draw_graph: function (array) {
         this.output.strokeStyle = '#F00';
         this.output.lineWidth = 3;
         this.output.beginPath();
         this.output.moveTo(2, array[0]);
         for (var i = 0; i < array.length; i++) {
-            this.output.lineTo(i+2, array[i]);
+            this.output.lineTo(i + 2, array[i]);
         }
         this.output.stroke();
     }
