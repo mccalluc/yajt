@@ -64,7 +64,7 @@ YAJT.core = {
             }, error_handler);
         } else if (navigator.webkitGetUserMedia) { // WebKit
             navigator.webkitGetUserMedia(video_obj, function (stream) {
-                self.video.src = window.webkitURL.createObjectURL(stream);
+                self.video.src = window.URL.createObjectURL(stream);
                 self.video.play();
             }, error_handler);
         } else if (navigator.mozGetUserMedia) { // Firefox

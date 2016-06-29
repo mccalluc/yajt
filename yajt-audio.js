@@ -5,16 +5,20 @@ if (typeof YAJT === 'undefined') {
 }
 
 YAJT.audio = {
+    context: null,
     generate: function (samples) {
-        var audio_context;
-        if (window.AudioContext) {
-            audio_context = new window.AudioContext();
-        } else if (window.webkitAudioContext) {
-            audio_context = new window.webkitAudioContext();
-        } else {
-            alert("Error: window.AudioContext not supported");
-            return;
+        if (!YAJT.audio.context) {
+            if (window.AudioContext) {
+                YAJT.audio.context = new window.AudioContext();
+            } else if (window.webkitAudioContext) {
+                YAJT.audio.context = new window.webkitAudioContext();
+            } else {
+                alert("Error: window.AudioContext not supported");
+                return;
+            }
         }
+
+        var audio_context = YAJT.audio.context;
         var channels = 1;
         var frame_count = samples.length;
 
@@ -30,7 +34,11 @@ YAJT.audio = {
         source.buffer = buffer;
         source.loop = true;
         source.connect(audio_context.destination);
-        source.start();
-        source.stop(YAJT.core.config.timeout / 1000); // Seconds, not ms.
+
+        if (YAJT.audio.old_source) {
+            YAJT.audio.old_source.stop(audio_context.currentTime);
+        }
+        source.start(audio_context.currentTime);
+        YAJT.audio.old_source = source;
     }
 };
