@@ -4,12 +4,14 @@
         <title>
             Yet Another Javascript Theremin
         </title>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <style>
             canvas { width: 50%; float: left; padding-right: 2em; }
-            body { font-family: sans-serif; }
+            body { font-family: sans-serif; background: #000; color: #FFF; }
+            a { color: #FFF; }
             .ui-widget { width: 30%; float: right; }
+            .ui-widget-content { background: #000; }
         </style>
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     </head>
 
     <body>
@@ -20,9 +22,7 @@
                     Yet Another Javascript Theremin
                 </h1>
                 <p>
-                    You are the tone generator.
                     It helps to stand against a well-lit blank wall of a contrasting color.
-                    Works best in Firefox right now.
                     <a href="http://github.com/mccalluc/yajt">Source on Github.</a>
                 </p>
                 <p>Threshold <span id="threshold"></span></p>
