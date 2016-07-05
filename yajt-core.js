@@ -16,7 +16,8 @@ YAJT.core = {
         timeout: 500, // 0.5 seconds
         transforms: [],
         threshold: 32,
-        tone: 0
+        tone: 0,
+        mode: null
     },
     timer_callback: function () {
         if (this.video.paused || this.video.ended) {

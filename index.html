@@ -31,7 +31,7 @@
                     <input type="radio" name="mode" value="spectrum">spectrum
                 </p>
                 <div id="waveform" class="mode">
-                   Edge-detection is applied to images from your camera, and the result is used as a waveform:
+                   Edge-detection is applied to an image from your camera, and the result is used as a waveform:
                    Gentle profiles produce gentle tones / jagged profiles produce jagged tones.
                 </div>
                 <div id="sequence" class="mode">
@@ -60,12 +60,16 @@
                         YAJT.image_transforms.horizontal_edge_detection
                     ]
                 });
+                
                 function reset_ui() {
+                    var mode = $('[name=mode]:checked').val();
                     $('.mode').hide();
-                    $('#' + $('[name=mode]:checked').val()).show();
+                    $('#' + mode).show();
+                    YAJT.core.config.mode = mode;
                 }
                 reset_ui();
                 $('[name=mode]').change(reset_ui);
+                
                 $('#threshold').slider({min: 1, max: 254, value: YAJT.core.config.threshold,
                     slide: function(event, ui) {
                         YAJT.core.config.threshold = ui.value;
