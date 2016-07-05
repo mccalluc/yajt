@@ -18,6 +18,9 @@ YAJT.audio = {
             }
         }
         
+        if (YAJT.audio.old_source) {
+            YAJT.audio.old_source.stop(YAJT.audio.context.currentTime);
+        }
         YAJT.audio.generate_from[YAJT.core.config.mode](samples);
     },
     generate_from: {
@@ -39,9 +42,6 @@ YAJT.audio = {
             source.loop = true;
             source.connect(audio_context.destination);
 
-            if (YAJT.audio.old_source) {
-                YAJT.audio.old_source.stop(audio_context.currentTime);
-            }
             source.start(audio_context.currentTime);
             YAJT.audio.old_source = source;
         },
@@ -49,7 +49,15 @@ YAJT.audio = {
             
         },
         spectrum: function(samples) {
+            var audio_context = YAJT.audio.context;
+            var oscillator = audio_context.createOscillator();
+
+            oscillator.type = 'square';
+            oscillator.frequency.value = Math.pow(2, YAJT.core.config.tone / 6) * 440;
+            oscillator.connect(audio_context.destination);
+            oscillator.start(audio_context.currentTime);
             
+            YAJT.audio.old_source = oscillator;
         }
     }
 };
