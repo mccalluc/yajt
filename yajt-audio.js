@@ -52,7 +52,16 @@ YAJT.audio = {
             var audio_context = YAJT.audio.context;
             var oscillator = audio_context.createOscillator();
 
-            oscillator.type = 'square';
+            var real = new Float32Array(2);
+            var imag = new Float32Array(2);
+            real[0] = 0;
+            imag[0] = 0;
+            real[1] = 1;
+            imag[1] = 0;
+
+            var wave = audio_context.createPeriodicWave(real, imag);
+
+            oscillator.setPeriodicWave(wave);
             oscillator.frequency.value = Math.pow(2, YAJT.core.config.tone / 6) * 440;
             oscillator.connect(audio_context.destination);
             oscillator.start(audio_context.currentTime);
