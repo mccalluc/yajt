@@ -31,14 +31,15 @@
                     <input type="radio" name="mode" value="spectrum">spectrum
                 </p>
                 <div id="waveform" class="mode">
-                   Edge-detection is applied to an image from your camera, and the result is used as a waveform:
-                   Gentle profiles produce gentle tones / jagged profiles produce jagged tones.
+                    Edge-detection is applied to an image from your camera, and the result is used as a waveform:
+                    Gentle profiles produce gentle tones / jagged profiles produce jagged tones.
                 </div>
                 <div id="sequence" class="mode">
-                    <p>TODO: sequence</p>
+                    Edge-detection is applied to an image from your camera, and the result defines a tone sequence:
+                    A diagonal down and to the right will produce a descending run.
                 </div>
                 <div id="spectrum" class="mode">
-                    Edge-detection is applied to an image from your camera, and the result is used to define a spectrum of sound:
+                    Edge-detection is applied to an image from your camera, and the result defines a spectrum of sound:
                     As you move to the right, higher harmonics will be introduced.
                 </div>
                 <p>threshold <span id="threshold"></span></p>
@@ -46,7 +47,7 @@
                 <p>tone <span id="tone"></span></p>
             </div>
         </div>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="yajt-core.js"></script>
@@ -54,14 +55,14 @@
         <script src="yajt-dimension-reduction.js"></script>
         <script src="yajt-audio.js"></script>
         <script>
-            $(function() {
+            $(function () {
                 YAJT.core.init({
                     transforms: [
                         YAJT.image_transforms.grayscale,
                         YAJT.image_transforms.horizontal_edge_detection
                     ]
                 });
-                
+
                 function reset_ui() {
                     var mode = $('[name=mode]:checked').val();
                     $('.mode').hide();
@@ -70,22 +71,22 @@
                 }
                 reset_ui();
                 $('[name=mode]').change(reset_ui);
-                
+
                 $('#threshold').slider({min: 1, max: 254, value: YAJT.core.config.threshold,
-                    slide: function(event, ui) {
+                    slide: function (event, ui) {
                         YAJT.core.config.threshold = ui.value;
                     }
                 });
                 $('#rate').slider({min: 0.5, max: 30, step: 0.5, value: 1000 / YAJT.core.config.timeout,
-                    slide: function(event, ui) {
+                    slide: function (event, ui) {
                         YAJT.core.config.timeout = 1000 / ui.value;
                     }
                 });
                 $('#tone').slider({min: -6, max: 6, step: 0.5, value: YAJT.core.config.tone,
-                    slide: function(event, ui) {
+                    slide: function (event, ui) {
                         YAJT.core.config.tone = ui.value;
                     }
-                }); 
+                });
             });
         </script>
     </body>
