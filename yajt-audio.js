@@ -81,7 +81,7 @@ YAJT.audio = {
                 $.each(samples.slice(start, end), function (i, el) {
                     sum += el;
                 });
-                sub_samples_a[i] = sum / sub_sample_length;
+                sub_samples_a[i] = YAJT.core.config.height - sum / sub_sample_length;
                 sub_samples_b[i] = 0;
             }
 
