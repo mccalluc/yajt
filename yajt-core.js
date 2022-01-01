@@ -59,29 +59,15 @@ YAJT.core = {
 
 
         var self = this;
-        var video_obj = {'video': true},
-        error_handler = function (error) {
-            console.log('Video capture error: ', error.code);
-        };
-        if (navigator.getUserMedia) { // Standard
-            navigator.getUserMedia(video_obj, function (stream) {
-                self.video.src = stream;
-                self.video.play();
-            }, error_handler);
-        } else if (navigator.webkitGetUserMedia) { // WebKit
-            navigator.webkitGetUserMedia(video_obj, function (stream) {
-                self.video.src = window.URL.createObjectURL(stream);
-                self.video.play();
-            }, error_handler);
-        } else if (navigator.mozGetUserMedia) { // Firefox
-            navigator.mozGetUserMedia(video_obj, function (stream) {
-                self.video.src = window.URL.createObjectURL(stream);
-                self.video.play();
-            }, error_handler);
-        } else {
-            alert('Error: navigator.getUserMedia not supported');
-            return;
-        }
+
+        navigator.mediaDevices.getUserMedia({'video': true})
+        .then((stream) => {
+            self.video.srcObject = stream;
+            self.video.play();
+        })
+        .catch((error) => {
+            console.error('Video error: ', error);
+        })
 
         this.video.addEventListener('play', function () {
             self.timer_callback();
